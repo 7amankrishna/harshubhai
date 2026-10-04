@@ -36,9 +36,12 @@ export default function Home() {
   // Load saved config & sound preferences from localStorage on mount
   useEffect(() => {
     try {
-      const savedConfig = localStorage.getItem('harshubhai_surprise_config');
+      const savedConfig = localStorage.getItem('harshubhai_surprise_config_v3');
       if (savedConfig) {
         setConfig(JSON.parse(savedConfig));
+      } else {
+        // Use latest default configuration
+        setConfig(defaultConfig);
       }
     } catch {
       // Ignore parse errors
@@ -49,7 +52,7 @@ export default function Home() {
   const handleSaveConfig = (newConfig: SurpriseConfig) => {
     setConfig(newConfig);
     try {
-      localStorage.setItem('harshubhai_surprise_config', JSON.stringify(newConfig));
+      localStorage.setItem('harshubhai_surprise_config_v3', JSON.stringify(newConfig));
     } catch {
       // Ignore
     }
