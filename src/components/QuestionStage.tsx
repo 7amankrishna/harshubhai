@@ -13,6 +13,12 @@ interface QuestionStageProps {
   onSuccess: () => void;
 }
 
+const FUNNY_OPTION_RESPONSES: { [key: number]: string } = {
+  0: 'Zombie Harshu detected! 🧟‍♀️ While you do love eating brains, think crispier!',
+  1: 'Cannibal Harshu strikes again! 🧠😂 But nope, think round with a hole in the middle!',
+  3: 'Suspicious indeed... 👀 but not quite the queen of all South Indian delicacies!',
+};
+
 export const QuestionStage: React.FC<QuestionStageProps> = ({
   questionData,
   recipientName,
@@ -23,6 +29,7 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
   const [isCorrect, setIsCorrect] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [wrongAttempt, setWrongAttempt] = useState<number | null>(null);
+  const [customFeedback, setCustomFeedback] = useState<string | null>(null);
 
   // Text input mode
   const [mode, setMode] = useState<'multiple' | 'text'>('multiple');
@@ -38,12 +45,14 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
     if (index === questionData.correctIndex) {
       setIsCorrect(true);
       setWrongAttempt(null);
+      setCustomFeedback(null);
       soundEngine.playFanfare();
       triggerHeartBurst(0.5, 0.4);
       setTimeout(() => triggerStarBurst(0.5, 0.5), 300);
     } else {
       setIsCorrect(false);
       setWrongAttempt(index);
+      setCustomFeedback(FUNNY_OPTION_RESPONSES[index] || questionData.hint);
       soundEngine.playError();
       setShowHint(true);
     }
@@ -53,28 +62,33 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
     e.preventDefault();
     if (isCorrect) return;
     if (!textAnswer.trim()) {
-      setTextError('Please type something thoughtful! ✨');
+      setTextError('Please type your favorite food! 🫓');
       soundEngine.playError();
       return;
     }
 
-    const clean = textAnswer.trim().toLowerCase();
-    const keywords = questionData.freeTextKeywords || ['all', 'love', 'chaos', 'forever', 'everything', 'best'];
-    const isKeywordMatch = keywords.some((k) => clean.includes(k.toLowerCase())) || clean.length > 5;
+    const clean = textAnswer.trim().toLowerCase().replace(/[\s\-_]+/g, '');
+    const keywords = questionData.freeTextKeywords || ['menduvada', 'meduvada', 'vada', 'mendu'];
+    const isKeywordMatch = keywords.some((k) => clean.includes(k.toLowerCase().replace(/[\s\-_]+/g, '')));
 
     if (isKeywordMatch) {
       setIsCorrect(true);
       setTextError(null);
+      setCustomFeedback(null);
       soundEngine.playFanfare();
       triggerHeartBurst(0.5, 0.4);
+    } else if (clean.includes('brain') || clean.includes('human')) {
+      soundEngine.playError();
+      setTextError('Zombie mode active! 🧠 But nope, think fried & crispy!');
+      setShowHint(true);
     } else {
       soundEngine.playError();
-      setTextError(questionData.hint || 'Think about our craziest inside jokes! 🤭');
+      setTextError(questionData.hint || 'Think of the crispy golden snack with chutney! 🫓');
       setShowHint(true);
     }
   };
 
-  const optionLetters = ['A', 'B', 'C', 'D', 'E'];
+  const optionLetters = ['A', 'B', 'C', 'D'];
 
   return (
     <motion.div
@@ -89,13 +103,13 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
         <div className="text-center space-y-2 mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-medium uppercase tracking-wider">
             <HelpCircle className="w-3.5 h-3.5" />
-            Inside Joke Check • Step 3 of 6
+            Stage 3 • The Extremely Serious Question 😂
           </div>
           <h2 className="text-2xl sm:text-3xl font-serif-custom font-bold text-white tracking-tight">
             Only the real <span className="bg-gradient-to-r from-pink-400 to-purple-300 bg-clip-text text-transparent">{recipientName}</span> knows… ❓✨
           </h2>
           <p className="text-xs sm:text-sm text-purple-200/70 max-w-md mx-auto">
-            Answer this personal friendship test to trigger the grand birthday reveal!
+            Answer this high-stakes dietary interrogation to unlock the grand birthday reveal!
           </p>
         </div>
 
@@ -197,16 +211,16 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
         {mode === 'text' && (
           <form onSubmit={handleTextSubmit} className="space-y-4 mb-6">
             <div className="relative">
-              <textarea
+              <input
+                type="text"
                 value={textAnswer}
                 onChange={(e) => {
                   setTextAnswer(e.target.value);
                   if (textError) setTextError(null);
                 }}
                 disabled={isCorrect}
-                rows={3}
-                placeholder="Type your sweetest answer or inside joke memory..."
-                className="w-full p-4 bg-black/40 border border-white/15 focus:border-pink-400 rounded-2xl text-white placeholder-purple-300/30 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500/20 resize-none"
+                placeholder="Type your favorite food (e.g. Menduvada)..."
+                className="w-full p-4 bg-black/40 border border-white/15 focus:border-pink-400 rounded-2xl text-white placeholder-purple-300/30 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500/20"
               />
             </div>
 
@@ -221,13 +235,13 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
                 type="submit"
                 className="w-full py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl text-white text-sm font-semibold hover:shadow-glow-pink transition-all"
               >
-                Submit Answer ✨
+                Submit Answer 🫓
               </button>
             )}
           </form>
         )}
 
-        {/* Hint Box */}
+        {/* Custom Feedback or Hint Box */}
         <AnimatePresence>
           {showHint && !isCorrect && (
             <motion.div
@@ -238,8 +252,10 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
             >
               <Lightbulb className="w-4 h-4 shrink-0 text-amber-400 mt-0.5" />
               <div>
-                <p className="font-semibold text-amber-300">Cute Hint 💡</p>
-                <p className="mt-0.5">{questionData.hint}</p>
+                <p className="font-semibold text-amber-300">
+                  {customFeedback ? 'Funny Reaction 😂' : 'Cute Hint 💡'}
+                </p>
+                <p className="mt-0.5">{customFeedback || questionData.hint}</p>
               </div>
             </motion.div>
           )}
@@ -255,7 +271,7 @@ export const QuestionStage: React.FC<QuestionStageProps> = ({
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold">
                 <Sparkles className="w-3.5 h-3.5" />
-                Identity Confirmed • It’s Harshita! 🎉
+                Identity Confirmed • MenduVada Queen Verified! 🫓🎉
               </div>
 
               <p className="text-sm text-purple-100 font-serif-custom italic">

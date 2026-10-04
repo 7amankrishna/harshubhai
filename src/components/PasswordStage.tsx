@@ -14,11 +14,11 @@ interface PasswordStageProps {
 }
 
 const PLAYFUL_ERRORS = [
-  'Oops! Not quite! Think of the nickname everyone loves calling you 🤭',
-  'Nice try, sneaky! Try again 👀',
-  'Hmm, are you really Harshita? Prove it! 💖',
-  'Close, but no sparkle! Need a hint? Click the key below 🔑',
-  'Nope! Even our inside jokes are easier than this 😜',
+  'Nope! Think about your absolute favorite crispy food 🫓🤭',
+  'Nice try, sneaky! But you know the secret nickname 👀',
+  'Close, but no Menduvada! Want a hint? Click the key below 🔑',
+  'Are you really Harshita or just a hungry imposter? 😜',
+  'Wrong passcode! Even our inside jokes are easier than this 😂',
 ];
 
 export const PasswordStage: React.FC<PasswordStageProps> = ({
@@ -34,17 +34,22 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
   const [showHint, setShowHint] = useState(false);
   const [isUnlocking, setIsUnlocking] = useState(false);
 
+  // Normalize input string: lowercase, remove all spaces, underscores, and hyphens
+  const normalize = (str: string) => str.toLowerCase().replace(/[\s\-_]+/g, '');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputVal.trim()) {
-      setErrorMessage('Please type something magical first! ✨');
+      setErrorMessage('Please type the secret password first! 🫓✨');
       soundEngine.playError();
       return;
     }
 
-    const cleanInput = inputVal.trim().toLowerCase();
-    const isMatch = passwords.some(
-      (p) => p.toLowerCase() === cleanInput || cleanInput.includes(p.toLowerCase())
+    const cleanInput = normalize(inputVal);
+    const normalizedPasswords = passwords.map(normalize);
+
+    const isMatch = normalizedPasswords.some(
+      (p) => cleanInput === p || cleanInput.includes(p) || p.includes(cleanInput)
     );
 
     if (isMatch) {
@@ -95,7 +100,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
           ) : (
             <Lock className="w-9 h-9 text-pink-300 drop-shadow-md" />
           )}
-          <span className="absolute -top-1 -right-1 text-base">✨</span>
+          <span className="absolute -top-1 -right-1 text-base">🫓</span>
         </motion.div>
 
         {/* Title & Tagline */}
@@ -106,7 +111,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-medium tracking-wider uppercase mb-1"
           >
             <Sparkles className="w-3 h-3" />
-            Top Secret Access
+            Stage 1 • Secret Birthday Vault
           </motion.div>
           <h2 className="text-2xl sm:text-3xl font-serif-custom font-bold text-white tracking-tight">
             A little surprise is waiting for{' '}
@@ -115,7 +120,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
             </span>
           </h2>
           <p className="text-sm text-purple-200/70 max-w-sm mx-auto leading-relaxed">
-            Enter the secret key to unlock your magical birthday journey 🗝️✨
+            Enter your secret password to unlock the memories vault 🗝️✨
           </p>
         </div>
 
@@ -137,7 +142,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
                   setInputVal(e.target.value);
                   if (errorMessage) setErrorMessage(null);
                 }}
-                placeholder="Enter secret word (e.g. harshu)..."
+                placeholder="Enter secret word (e.g. MenduVada)..."
                 disabled={isUnlocking}
                 autoFocus
                 className="w-full pl-11 pr-12 py-3.5 bg-black/40 border border-white/15 focus:border-pink-400/80 rounded-2xl text-white placeholder-purple-300/30 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500/30 transition-all shadow-inner"
@@ -179,7 +184,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
             {isUnlocking ? (
               <>
                 <Sparkles className="w-4 h-4 animate-spin text-pink-200" />
-                <span>Unlocking the Magic...</span>
+                <span>Unlocking the Vault...</span>
               </>
             ) : (
               <>
@@ -201,7 +206,7 @@ export const PasswordStage: React.FC<PasswordStageProps> = ({
             className="text-xs text-purple-300/70 hover:text-pink-300 transition-colors flex items-center gap-1.5 underline decoration-dotted underline-offset-4"
           >
             <Heart className="w-3.5 h-3.5 text-pink-400" />
-            <span>{showHint ? 'Hide hint' : 'Need a little hint?'}</span>
+            <span>{showHint ? 'Hide hint' : 'Need a little hint? 🫓'}</span>
           </button>
 
           <AnimatePresence>

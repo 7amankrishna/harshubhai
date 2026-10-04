@@ -2,106 +2,115 @@ import { SurpriseConfig } from '@/types';
 
 export const defaultConfig: SurpriseConfig = {
   recipientName: 'Harshita',
-  nickname: 'Harshu',
-  passwords: ['harshu', 'harshita', 'bestie', '1234', 'cutie', 'hbd'],
-  passwordHint: 'Try your favorite nickname or the name everyone calls you! (hint: harshu 💖)',
-  // Curated aesthetic friendship photo for puzzle
+  nickname: 'MenduVada',
+  passwords: [
+    'menduvada',
+    'meduvada',
+    'mendu vada',
+    'medu vada',
+    'mendu_vada',
+    'medu_vada',
+    'harshu',
+    'harshita'
+  ],
+  passwordHint: 'Think of your absolute favorite crispy, golden-fried South Indian snack 🫓 (hint: MenduVada 😂)',
+  // Aesthetic friendship photo placeholder for puzzle (easily replaceable in settings or code)
   puzzleImage: 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop',
   puzzleGridSize: 3,
   question: {
-    text: 'What is our official unofficial superpower when we are together?',
+    text: 'What is your favorite food?',
     options: [
-      'Telepathic gossiping across a crowded room 👀',
-      'Laughing until our stomachs hurt at 2 AM 🌙',
-      'Creating absolute chaos wherever we go 💃✨',
-      'All of the above and being irreplaceable friends forever ❤️'
+      '🧠 Human brain',
+      '🧠 Human brain in any combination',
+      '🫓 Menduvada',
+      '🍽️ Something suspicious'
     ],
-    correctIndex: 3,
-    hint: 'Think about all our memories... is just one answer ever enough for us? 🤭',
-    explanation: 'Correct! From 2 AM laughter to unspoken telepathy, nothing compares to our bond! ✨',
+    correctIndex: 2, // 🫓 Menduvada
+    hint: 'You might crave human brains on Mondays, but your true love is round with a hole in the middle 🫓',
+    explanation: 'Bingo! 🫓 Menduvada supremacy forever! You passed the official test!',
     acceptsFreeText: true,
-    freeTextKeywords: ['all', 'love', 'chaos', 'forever', 'everything', 'best', 'friend', 'telepathy']
+    freeTextKeywords: ['menduvada', 'meduvada', 'mendu vada', 'medu vada', 'vada', 'mendu']
   },
-  birthdayHeadline: 'Happy Birthday, Harshita! 🎂✨',
-  birthdayQuote: '“Some people become memories… and some memories become the reason we smile every single day.” ❤️',
+  birthdayHeadline: 'Happy Birthday, MenduVada! 🎂🫓✨',
+  birthdayQuote: '“Some people become memories… and some memories become the reason we smile (and crave Menduvada at 2 AM).” ❤️',
   birthdayLetter: {
-    greeting: 'Dearest Harshu,',
+    greeting: 'Dearest Harshita (aka MenduVada 🫓),',
     paragraphs: [
-      'Wishing the happiest, most magical birthday to someone who brings so much sunshine, laughter, and genuine warmth into my life. Every chapter is brighter because you are in it.',
-      'Thank you for being the person I can always count on, for the endless inside jokes, the midnight debriefs, the spontaneous adventures, and for always understanding me even when no words are spoken.',
-      'May this new year of your life bring you boundless joy, fearless adventures, wild success, and all the love your beautiful heart can hold. You deserve all the stars in the night sky!'
+      'Wishing the happiest, most chaotic, and most magical birthday to my favorite human (who occasionally craves human brains 🧠)! Another year of you blessing the world with your unmatched energy, ridiculous laughs, and golden heart.',
+      'Thank you for being the one person I can always share the dumbest inside jokes with, debate the most absurd life theories at midnight, and count on no matter what. Having you as a best friend makes everyday life a whole comedy special.',
+      'May this new year bring you endless plates of crispy hot Menduvadas, wild adventures, unstoppable success, and all the happiness in the entire universe. Stay your wonderfully chaotic, beautiful self always!'
     ],
-    highlightQuote: '“To more spontaneous road trips, endless coffee dates, uncontrollable giggles, and a lifetime of shared memories.” 🥂✨',
-    closing: 'With all my love and warmest hugs,',
-    sender: 'Your Forever Bestie ❤️',
-    postScript: 'P.S. Make a huge wish when you blow out the candles — you truly deserve the world! 🎈🌟'
+    highlightQuote: '“To more midnight debriefs, unfiltered laughter, telepathic eye contact, and a lifetime of Menduvada runs!” 🥂🫓✨',
+    closing: 'Happy Birthday, MenduVada ❤️',
+    sender: '— Aman',
+    postScript: 'P.S. Make a massive wish on the cake candles — and no, wishing for unlimited human brains doesn’t count! 🎈🌟'
   },
   memories: [
     {
       id: 'm1',
-      title: 'The Beginning 🌸',
-      date: 'Day 1 & Counting',
-      caption: 'And somehow, this random day turned into one of my most cherished friendships in the whole world.',
+      title: 'The Origin of Chaos 🌸',
+      date: 'Chapter 1',
+      caption: 'Where two certified crackheads met and realized the world was not ready for this duo.',
       imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop',
       tag: '🌸 Origins',
-      location: 'Where it all started',
-      likes: 24,
-      highlight: 'The day we clicked instantly'
+      location: 'Where it all began',
+      likes: 48,
+      highlight: 'The exact moment we realized we shared the exact same braincell.'
     },
     {
       id: 'm2',
-      title: 'Midnight Debriefs & Laughter 🌙',
-      date: 'Late Nights',
-      caption: 'The talks where we solved zero life problems but laughed until we were crying.',
+      title: '2 AM Food Cravings & Deep Talks 🌙',
+      date: 'Late Night Chronicles',
+      caption: 'Solving none of our problems but passionately debating Menduvada vs everything else.',
       imageUrl: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1000&auto=format&fit=crop',
-      tag: '🌙 2 AM Talks',
-      location: 'Under the stars',
-      likes: 42,
-      highlight: 'Laughing so hard we couldn’t breathe'
+      tag: '🌙 Midnight Tales',
+      location: 'Under the moonlight',
+      likes: 72,
+      highlight: 'Laughed so hard our stomachs were sore for three business days.'
     },
     {
       id: 'm3',
-      title: 'Pure Chaos & Shenanigans 🤪',
+      title: 'Unfiltered Shenanigans 🤪',
       date: 'Every Single Outing',
-      caption: 'Proof that when we are left unsupervised, 100% pure comedy is guaranteed.',
+      caption: 'Proof that whenever we are left unsupervised, chaos is not a possibility—it is guaranteed.',
       imageUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=1000&auto=format&fit=crop',
-      tag: '💃 Chaos Duo',
-      location: 'Everywhere together',
-      likes: 38,
-      highlight: 'Nobody else gets our humor'
+      tag: '💃 Chaos Partners',
+      location: 'Unsupervised everywhere',
+      likes: 64,
+      highlight: 'Nobody else understands our weird glances across the room.'
     },
     {
       id: 'm4',
-      title: 'Golden Hour Glow 🌅',
+      title: 'Golden Hour Glow ✨',
       date: 'Sunsets & Serenity',
-      caption: 'Quiet moments, deep conversations, and realizing how lucky I am to have you in my corner.',
+      caption: 'A rare moment where we were actually calm, appreciating how lucky we are to be besties.',
       imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop',
       tag: '✨ Golden Hour',
-      location: 'Chasing sunsets',
-      likes: 56,
-      highlight: 'Unmatched peace'
+      location: 'Chasing the sunset',
+      likes: 89,
+      highlight: 'Unmatched comfort and peace of mind with you.'
     },
     {
       id: 'm5',
-      title: 'Coffee, Secrets & Dreams ☕',
-      date: 'Weekend Cafe Hangs',
-      caption: 'Two coffees, four hours of conversation, and dreams of conquering the world together.',
+      title: 'Cafe Hangouts & Plotting World Domination ☕',
+      date: 'Weekend Rituals',
+      caption: 'Two iced drinks, three hours of spilling tea, and laughing at the most unhinged things.',
       imageUrl: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=1000&auto=format&fit=crop',
-      tag: '☕ Cafe Stories',
-      location: 'Our favorite corner',
-      likes: 31,
-      highlight: 'Best venting sessions'
+      tag: '☕ Cafe Debriefs',
+      location: 'Our favorite corner table',
+      likes: 55,
+      highlight: 'The gossip sessions that could bring down governments.'
     },
     {
       id: 'm6',
-      title: 'To a Million More Chapters 🥂',
-      date: 'Forever & Always',
-      caption: 'No matter where life takes us, you will always be family. Cheers to your special day!',
+      title: 'Forever My Partner in Crime 🥂',
+      date: 'Always & Forever',
+      caption: 'Through every high, every low, and every single Menduvada craving, I’ve got your back for life.',
       imageUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1000&auto=format&fit=crop',
-      tag: '❤️ Forever Bond',
-      location: 'In each other’s hearts',
-      likes: 99,
-      highlight: 'Here for life'
+      tag: '❤️ Unbreakable',
+      location: 'In each other’s corner',
+      likes: 120,
+      highlight: 'Here for all the upcoming chapters!'
     }
   ],
   themeColor: 'purple'
