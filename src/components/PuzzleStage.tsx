@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Puzzle, Sparkles, CheckCircle2, RotateCcw, Eye, Wand2, ArrowRight, Heart } from 'lucide-react';
 import { soundEngine } from '@/utils/soundEngine';
 import { triggerHeartBurst, triggerStarBurst } from '@/utils/confetti';
+import { cssUrl } from '@/utils/cssUrl';
 
 interface PuzzleStageProps {
   puzzleImage: string;
@@ -262,7 +263,7 @@ export const PuzzleStage: React.FC<PuzzleStageProps> = ({
               animate={{ opacity: 0.65 }}
               exit={{ opacity: 0 }}
               className="absolute inset-2.5 rounded-xl z-20 pointer-events-none bg-cover bg-center border-2 border-dashed border-pink-400/70"
-              style={{ backgroundImage: `url(${puzzleImage})` }}
+              style={{ backgroundImage: cssUrl(puzzleImage) }}
             >
               <div className="absolute inset-0 bg-purple-950/20 backdrop-blur-[1px] flex items-center justify-center">
                 <span className="bg-black/80 px-3 py-1 rounded-full text-xs text-pink-200 font-medium">
@@ -309,7 +310,7 @@ export const PuzzleStage: React.FC<PuzzleStageProps> = ({
                       : 'ring-1 ring-white/10 hover:ring-white/40'
                   }`}
                   style={{
-                    backgroundImage: `url(${puzzleImage})`,
+                    backgroundImage: cssUrl(puzzleImage),
                     backgroundSize: `${gridSize * 100}% ${gridSize * 100}%`,
                     backgroundPosition: `${xPercent}% ${yPercent}%`,
                     backgroundRepeat: 'no-repeat',
